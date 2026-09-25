@@ -9,6 +9,7 @@ defineProps({
     <ul>
       <li>净用量 {{ result.raw_count }} 片，损耗 {{ result.waste_pct }}%</li>
       <li>地面 {{ result.area_m2 }} m²，单砖 {{ result.piece_m2 }} m²</li>
+      <li>旋向：{{ result.rotated ? '旋转90°' : '不旋转' }}</li>
     </ul>
   </div>
 </template>

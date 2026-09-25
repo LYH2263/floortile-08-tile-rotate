@@ -26,12 +26,17 @@ def init_db():
             room_id INTEGER,
             tile_id INTEGER,
             waste_pct REAL,
+            rotated INTEGER NOT NULL DEFAULT 0,
             result_json TEXT NOT NULL,
             note TEXT DEFAULT '',
             created_at TEXT NOT NULL
         );
         """
     )
+    run_cols = {r["name"] for r in conn.execute("PRAGMA table_info(calc_runs)").fetchall()}
+    if "rotated" not in run_cols:
+        conn.execute("ALTER TABLE calc_runs ADD COLUMN rotated INTEGER NOT NULL DEFAULT 0")
+        conn.commit()
     if conn.execute("SELECT COUNT(*) c FROM rooms").fetchone()["c"] == 0:
         conn.executemany(
             "INSERT INTO rooms(name,length,width,data_quality,note) VALUES (?,?,?,?,?)",
@@ -46,9 +51,11 @@ def init_db():
             [
                 ("600x600", 0.6, 0.6, "clean"),
                 ("800x800", 0.8, 0.8, "clean"),
+                ("600x300", 0.6, 0.3, "clean"),
                 ("脏数据-零面积", 0.0, 0.6, "dirty"),
             ],
         )
         conn.execute("INSERT INTO settings(key,value) VALUES ('waste_pct','8')")
+        conn.execute("INSERT INTO settings(key,value) VALUES ('default_rotate','0')")
         conn.commit()
     conn.close()

@@ -9,6 +9,8 @@ def get_all() -> dict:
         out = {r["key"]: r["value"] for r in rows}
         if "waste_pct" not in out:
             out["waste_pct"] = str(DEFAULT_WASTE_PCT)
+        if "default_rotate" not in out:
+            out["default_rotate"] = "0"
         return out
     finally:
         conn.close()
@@ -17,3 +19,9 @@ def get_all() -> dict:
 def get_waste_pct() -> float:
     raw = get_all().get("waste_pct", str(DEFAULT_WASTE_PCT))
     return float(raw)
+
+
+def get_default_rotate() -> bool:
+    """System default tile rotation preference (applies only when a run doesn't say)."""
+    raw = str(get_all().get("default_rotate", "0")).strip().lower()
+    return raw in ("1", "true", "yes", "on")

@@ -5,6 +5,7 @@ class EstimateRequest(BaseModel):
     room_id: int
     tile_id: int
     waste_pct: float | None = None
+    rotate: bool | None = None
     save: bool = False
     note: str = ""
 
@@ -19,5 +20,6 @@ class EstimateResponse(BaseModel):
     raw_count: int
     waste_pct: float
     order_count: int
+    rotated: bool = False
     layout: dict
     run_id: int | None = None

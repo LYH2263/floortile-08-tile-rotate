@@ -8,6 +8,7 @@ def insert_run(
     room_id: int,
     tile_id: int,
     waste_pct: float,
+    rotated: bool,
     result: dict,
     note: str = "",
 ) -> int:
@@ -15,13 +16,14 @@ def insert_run(
     try:
         cur = conn.execute(
             """
-            INSERT INTO calc_runs(room_id, tile_id, waste_pct, result_json, note, created_at)
-            VALUES (?,?,?,?,?,?)
+            INSERT INTO calc_runs(room_id, tile_id, waste_pct, rotated, result_json, note, created_at)
+            VALUES (?,?,?,?,?,?,?)
             """,
             (
                 room_id,
                 tile_id,
                 waste_pct,
+                1 if rotated else 0,
                 json.dumps(result, ensure_ascii=False),
                 note,
                 datetime.now(timezone.utc).isoformat(),
