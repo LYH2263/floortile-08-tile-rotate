@@ -28,3 +28,15 @@ body { margin: 0; font-family: system-ui, sans-serif; background: #f4f0ea; }
 .mini-grid .cell { background: #16a085; aspect-ratio: 1; opacity: 0.85; }
 label { display: block; margin: 0.5rem 0; }
 button { margin-right: 0.5rem; padding: 0.4rem 0.8rem; }
+.orient-pref { color: #555; font-size: 0.9rem; }
+.orient-tag {
+  margin-left: 0.5rem; padding: 0 0.4rem; border-radius: 3px;
+  background: #ecf0f1; color: #2c3e50; font-size: 0.85rem;
+}
+.grid-preview.is-rotated .orient-tag { background: #fdebd0; color: #b9770e; }
+.detail-row td { background: #faf7f2; }
+.detail-row ul { margin: 0.25rem 0; padding-left: 1.2rem; }
+.setting-row select { margin-left: 0.5rem; }
+.hint { color: #666; font-size: 0.9rem; }
+.alert.ok { color: #1e8449; }
+.link-btn { border: none; background: none; color: #2980b9; padding: 0; cursor: pointer; }
